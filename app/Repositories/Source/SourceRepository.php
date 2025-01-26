@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Collection;
 
 class SourceRepository implements SourceRepositoryInterface
 {
+    protected $model;
+
+    public function __construct(Source $model)
+    {
+        $this->model = $model;
+    }
+
     /**
      * @param string $sourceName
      * @param int $dataSourceId
@@ -14,10 +21,10 @@ class SourceRepository implements SourceRepositoryInterface
      */
     public function findByNameOrCreate(string $sourceName)
     {
-        $source = Source::query()->where('name', $sourceName)->first();
+        $source = $this->model->query()->where('name', $sourceName)->first();
 
         if (empty($source)) {
-            $source = Source::create([
+            $source = $this->model->create([
                 'name' => $sourceName,
             ]);
         }

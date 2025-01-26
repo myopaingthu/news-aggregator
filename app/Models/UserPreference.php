@@ -9,6 +9,10 @@ class UserPreference extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'preferences' => 'array',
+    ];
+
     protected $fillable = ['user_id', 'preferences'];
 
     public function user()

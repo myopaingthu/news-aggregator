@@ -8,19 +8,26 @@ use Illuminate\Database\Eloquent\Collection;
 
 class DataSourceRepository implements DataSourceRepositoryInterface
 {
+    protected $model;
+
+    public function __construct(DataSource $model)
+    {
+        $this->model = $model;
+    }
+
     public function getAll(): Collection
     {
-        return DataSource::all();
+        return $this->model->all();
     }
 
     public function getLastFetchedTime(int $sourceId): ?\Carbon\Carbon
     {
-        $dataSource = DataSource::find($sourceId);
+        $dataSource = $this->model->find($sourceId);
         return $dataSource ? $dataSource->last_fetched_at : null;
     }
 
     public function updateLastFetchedTime(int $sourceId, string $timestamp): void
     {
-        DataSource::where('id', $sourceId)->update(['last_fetched_at' => Carbon::parse($timestamp)->toDateTimeString()]);
+        $this->model->where('id', $sourceId)->update(['last_fetched_at' => Carbon::parse($timestamp)->toDateTimeString()]);
     }
 }
