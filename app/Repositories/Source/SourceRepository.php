@@ -15,8 +15,9 @@ class SourceRepository implements SourceRepositoryInterface
     }
 
     /**
+     * Find a source by name or create it if it doesn't exist.
+     *
      * @param string $sourceName
-     * @param int $dataSourceId
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
     public function findByNameOrCreate(string $sourceName)
@@ -29,5 +30,15 @@ class SourceRepository implements SourceRepositoryInterface
             ]);
         }
         return $source;
+    }
+
+    /**
+     * Get all sources.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAll(): Collection
+    {
+        return $this->model->all();
     }
 }

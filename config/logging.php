@@ -127,6 +127,12 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        'querylog' => [
+            'driver' => 'daily',
+            'level' => 'debug',
+            'path' => storage_path('logs/query/query.log'),
+        ],
+
     ],
 
 ];

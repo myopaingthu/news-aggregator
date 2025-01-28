@@ -26,6 +26,11 @@ class TheGuardianAPIService implements APIServiceInterface
         $this->dataSourceRepository = $dataSourceRepository;
     }
 
+    /**
+     * Fetch news articles from The Guardian API and process them.
+     *
+     * @return void
+     */
     public function fetchNews(): void
     {
         try {
@@ -62,6 +67,11 @@ class TheGuardianAPIService implements APIServiceInterface
         }
     }
 
+    /**
+     * Process and save articles to the database.
+     *
+     * @param array $articles
+     */
     protected function processArticles(array $articles): void
     {
         $mappedArticles = collect($articles)->map(function ($article) {
@@ -87,7 +97,6 @@ class TheGuardianAPIService implements APIServiceInterface
         Log::info('The Guardian articles successfully saved and last fetched time updated.');
     }
 
-
     /**
      * Log the full URL of the API request for debugging purposes.
      *
@@ -95,6 +104,6 @@ class TheGuardianAPIService implements APIServiceInterface
      */
     protected function logFullUrl(string $fullUrl): void
     {
-        Log::info('NYT API Request URL: ' . $fullUrl);
+        Log::info('The Guardian API Request URL: ' . $fullUrl);
     }
 }

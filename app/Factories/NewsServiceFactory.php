@@ -9,6 +9,12 @@ use App\Services\API\TheGuardianAPIService;
 
 class NewsServiceFactory
 {
+    /**
+     * Create an API service instance based on the data source name.
+     *
+     * @param string $dataSourceName
+     * @return \App\Services\API\APIServiceInterface|null
+     */
     public static function create(string $dataSourceName): ?APIServiceInterface
     {
         return match ($dataSourceName) {

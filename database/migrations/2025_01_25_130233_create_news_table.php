@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('source_id')->constrained('sources')->onDelete('cascade')->nullable();
             $table->foreignId('data_source_id')->constrained('data_sources')->onDelete('cascade');
-            $table->string('author')->nullable();
-            $table->string('title');
+            $table->string('author')->nullable()->index();
+            $table->string('title')->index();
             $table->string('category', 50)->nullable()->index();
             $table->string('slug')->index();
             $table->text('description')->nullable()->index();
-            $table->longText('content')->nullable();
+            $table->longText('content')->nullable()->index();
             $table->string('url')->nullable();
             $table->string('image_url')->nullable();
             $table->timestamp('published_at')->nullable();

@@ -13,9 +13,8 @@ class NewYorkTimesAPIService implements APIServiceInterface
     protected $newsBaseURL;
     protected $newsService;
     protected $dataSourceRepository;
-    protected $limit = 100;
+    protected $limit = 20;
     protected $id = 2;
-    protected $domains = ['nytimes.com']; // Example domain for NYT
 
     public function __construct(
         NewsServiceInterface $newsService,
@@ -27,6 +26,11 @@ class NewYorkTimesAPIService implements APIServiceInterface
         $this->dataSourceRepository = $dataSourceRepository;
     }
 
+    /**
+     * Fetch news articles from the New York Times API and process them.
+     *
+     * @return void
+     */
     public function fetchNews(): void
     {
         try {
@@ -55,22 +59,18 @@ class NewYorkTimesAPIService implements APIServiceInterface
 
                 $newArticles = $response->json()['response']['docs'] ?? [];
 
-                // Add the articles to the collection
                 $articles = array_merge($articles, $newArticles);
                 $totalArticles = count($articles);
 
-                // If fewer articles than expected, stop the loop
                 if (count($newArticles) < 10) {
                     break;
                 }
 
-                // Move to the next page if there are more articles to fetch
                 $queryParams['page'] += 1;
             }
 
-            // Process the retrieved articles (up to the specified limit)
             if (!empty($articles)) {
-                $this->processArticles(array_slice($articles, 0, $this->limit)); // Ensure we return only the desired number
+                $this->processArticles(array_slice($articles, 0, $this->limit));
             } else {
                 Log::info('No new articles found from the NYT API.');
             }
@@ -80,7 +80,6 @@ class NewYorkTimesAPIService implements APIServiceInterface
             ]);
         }
     }
-
 
     /**
      * Log the full URL of the API request for debugging purposes.
@@ -100,7 +99,6 @@ class NewYorkTimesAPIService implements APIServiceInterface
     protected function processArticles(array $articles): void
     {
         $articles = array_reverse($articles);
-        // Map articles to the format expected by your application
         $mappedArticles = collect($articles)->map(function ($article) {
             return [
                 'title' => $article['headline']['main'] ?? 'No Title',
@@ -118,10 +116,8 @@ class NewYorkTimesAPIService implements APIServiceInterface
             ];
         })->toArray();
 
-        // Save articles using the news service
         $this->newsService->saveNews($mappedArticles, $this->id);
 
-        // Update the last fetched time based on the latest article
         $latestPublishedAt = collect($articles)->max('pub_date');
         $this->dataSourceRepository->updateLastFetchedTime($this->id, $latestPublishedAt);
 

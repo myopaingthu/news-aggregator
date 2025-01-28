@@ -21,6 +21,13 @@ class NewsService implements NewsServiceInterface
         $this->userPreferenceRepository = $userPreferenceRepository;
     }
 
+    /**
+     * Save or update news articles in the database.
+     *
+     * @param array $articles
+     * @param int $dataSourceId
+     * @return void
+     */
     public function saveNews(array $articles, int $dataSourceId): void
     {
         foreach ($articles as $article) {
@@ -45,6 +52,13 @@ class NewsService implements NewsServiceInterface
         }
     }
 
+    /**
+     * Retrieve filtered news articles based on the specified filters.
+     *
+     * @param array $filters
+     * @param int $limit
+     * @return LengthAwarePaginator
+     */
     public function getFilteredNews(array $filters, int $limit): LengthAwarePaginator
     {
         if (!empty($filters['preference_id'])) {
@@ -55,6 +69,19 @@ class NewsService implements NewsServiceInterface
         }
 
         return $this->newsRepository->fetchFilteredNews($filters, $limit);
+    }
+
+    /**
+     * Search news articles based on the provided query.
+     *
+     * @param string $query
+     * @param int $limit
+     * @param int $page
+     * @return LengthAwarePaginator
+     */
+    public function searchNews(string $query, int $limit, int $page): LengthAwarePaginator
+    {
+        return $this->newsRepository->fetchSearchResults($query, $limit, $page);
     }
 
     /**

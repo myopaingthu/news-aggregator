@@ -31,6 +31,11 @@ class NewsApiService implements APIServiceInterface
         $this->dataSourceRepository = $dataSourceRepository;
     }
 
+    /**
+     * Fetch news articles from the News API and process them.
+     *
+     * @return void
+     */
     public function fetchNews(): void
     {
         try {

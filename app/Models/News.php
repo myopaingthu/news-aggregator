@@ -9,6 +9,11 @@ class News extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'source_id',
         'data_source_id',
@@ -23,15 +28,26 @@ class News extends Model
         'published_at'
     ];
 
+    /**
+     * Get the source associated with the news article.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function source()
     {
         return $this->belongsTo(Source::class);
     }
 
+    /**
+     * Get the data source associated with the news article.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function dataSource()
     {
         return $this->belongsTo(DataSource::class);
     }
+
 
     /**
      * Scope to filter news articles.
@@ -67,5 +83,12 @@ class News extends Model
         }
 
         return $query;
+    }
+
+    public function scopeSearch($query, string $searchQuery)
+    {
+        return $query->where('title', 'LIKE', "%{$searchQuery}%")
+            ->orWhere('description', 'LIKE', "%{$searchQuery}%")
+            ->orWhere('content', 'LIKE', "%{$searchQuery}%");
     }
 }
