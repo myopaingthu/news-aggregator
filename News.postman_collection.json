@@ -1,0 +1,413 @@
+{
+	"info": {
+		"_postman_id": "d65dd1a3-9498-49cc-ba72-68ef31e13454",
+		"name": "News",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32507603"
+	},
+	"item": [
+		{
+			"name": "News",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|M6q3iW9igCKetW4M12FAmHIoFSShm4JHlKGzIpce7383b063",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}news?preference_id=1",
+					"host": [
+						"{{base_url}}news"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Film",
+							"disabled": true
+						},
+						{
+							"key": "date",
+							"value": "2025-01-27",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "preference_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Source",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|t2IAouZ1MjonPl4q4AHLc8vggxrqEV3UXd011oaH39b7debb",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}api/sources",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"sources"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Opinion",
+							"disabled": true
+						},
+						{
+							"key": "date",
+							"value": "2025-01-26",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Preference List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|M6q3iW9igCKetW4M12FAmHIoFSShm4JHlKGzIpce7383b063",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}api/user_preferences",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"user_preferences"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Opinion",
+							"disabled": true
+						},
+						{
+							"key": "date",
+							"value": "2025-01-26",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Preference Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|M6q3iW9igCKetW4M12FAmHIoFSShm4JHlKGzIpce7383b063",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"preferences\": {\r\n        \"categories\": [\r\n            \"Film\"\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}user_preferences",
+					"host": [
+						"{{base_url}}user_preferences"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Opinion",
+							"disabled": true
+						},
+						{
+							"key": "date",
+							"value": "2025-01-26",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Preference Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|uKQMNoVKwEXRL0DSFDun4RaCUIvn2XPZoxvLbIVM6427dfab",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"preferences\": {\r\n        \"categories\": [\r\n            \"Film\"\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}user_preferences/8",
+					"host": [
+						"{{base_url}}user_preferences"
+					],
+					"path": [
+						"8"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Opinion",
+							"disabled": true
+						},
+						{
+							"key": "date",
+							"value": "2025-01-26",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Preference Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|M6q3iW9igCKetW4M12FAmHIoFSShm4JHlKGzIpce7383b063",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"preferences\": {\r\n        \"authors\": [\r\n            \"By John Yoon\",\r\n            \"By Adam Rasgon\"\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}user_preferences/1",
+					"host": [
+						"{{base_url}}user_preferences"
+					],
+					"path": [
+						"1"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Opinion",
+							"disabled": true
+						},
+						{
+							"key": "date",
+							"value": "2025-01-26",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search News",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}news/search?q=Working from home",
+					"host": [
+						"{{base_url}}news"
+					],
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Working from home"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "test@example.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}login",
+					"host": [
+						"{{base_url}}login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|M6q3iW9igCKetW4M12FAmHIoFSShm4JHlKGzIpce7383b063",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "test@example.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}logout",
+					"host": [
+						"{{base_url}}logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
